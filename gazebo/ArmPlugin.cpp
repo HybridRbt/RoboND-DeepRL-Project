@@ -22,7 +22,8 @@
 
 // Define DQN API Settings
 
-#define INPUT_CHANNELS 3
+#define INPUT_CHANNELS 3   // this is the NUM_CHANNELS in catch sample
+#define NUM_ACTIONS    3   // default in DQN.py = 3
 #define ALLOW_RANDOM true
 #define DEBUG_DQN false
 #define GAMMA 0.9f
@@ -174,6 +175,12 @@ bool ArmPlugin::createAgent()
 		printf("ArmPlugin - failed to create DQN agent\n");
 		return false;
 	}
+
+	dqnAgent* agent = dqnAgent::Create(INPUT_WIDTH, INPUT_HEIGHT,
+										 NUM_CHANNELS, NUM_ACTIONS, OPTIMIZER,
+										 LEARNING_RATE, REPLAY_MEMORY, BATCH_SIZE,
+										 GAMMA, EPS_START, EPS_END, EPS_DECAY,
+										 USE_LSTM, LSTM_SIZE, ALLOW_RANDOM, DEBUG_DQN);
 
 	// Allocate the python tensor for passing the camera state
 
