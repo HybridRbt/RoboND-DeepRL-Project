@@ -332,6 +332,15 @@ bool ArmPlugin::updateAgent()
 
 	float velocity = 0.0; // TODO - Set joint velocity based on whether action is even or odd.
 
+	if (action % 2 == 0) // action is even
+	{
+		velocity += actionVelDelta;
+	}
+	else
+	{
+		velocity -= actionVelDelta;
+	}
+
 	if( velocity < VELOCITY_MIN )
 		velocity = VELOCITY_MIN;
 
@@ -362,6 +371,15 @@ bool ArmPlugin::updateAgent()
 	/
 	*/
 	float joint = 0.0; // TODO - Set joint position based on whether action is even or odd.
+
+	if (action % 2 == 0) // action is even
+	{
+		joint += actionJointDelta;
+	}
+	else
+	{
+		joint -= actionJointDelta;
+	}
 
 	// limit the joint to the specified range
 	if( joint < JOINT_MIN )
