@@ -634,12 +634,15 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 				// compute the smoothed moving average of the delta of the distance to the goal
 				avgGoalDelta  = 0.0;
-				rewardHistory = None;
-				newReward     = None;
+				float alpha = 0.3f;
+
+				avgGoalDelta  = (avgGoalDelta * alpha) + (distDelta * (1 - alpha));
+				rewardHistory = avgGoalDelta;
+				newReward     = true;
 			}
 
 			lastGoalDistance = distGoal;
-		} */
+		}
 	}
 
 	// issue rewards and train DQN
