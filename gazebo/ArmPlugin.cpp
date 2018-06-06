@@ -604,16 +604,16 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		*/
 
 
-		/*if(checkGroundContact)
+		if(gripBBox.z.min < groundContact)  // touch ground
 		{
 
 			if(DEBUG){printf("GROUND CONTACT, EOE\n");}
 
-			rewardHistory = None;
-			newReward     = None;
-			endEpisode    = None;
+			rewardHistory = REWARD_LOSS;
+			newReward     = true;
+			endEpisode    = true;
 		}
-		*/
+
 
 		/*
 		/ TODO - Issue an interim reward based on the distance to the object
