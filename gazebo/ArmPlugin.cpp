@@ -603,8 +603,9 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		/
 		*/
 
+		bool touchGround = (gripBBox.z.min < groundContact);
 
-		if(gripBBox.z.min < groundContact)  // touch ground
+		if(touchGround)  // touch ground
 		{
 
 			if(DEBUG){printf("GROUND CONTACT, EOE\n");}
