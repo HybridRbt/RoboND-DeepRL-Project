@@ -621,10 +621,9 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		/
 		*/
 
-		/*
-		if(!checkGroundContact)
+		if(!touchGround)
 		{
-			const float distGoal = 0; // compute the reward from distance to the goal
+			const float distGoal = BoxDistance(gripBBox, propBBox); // compute the reward from distance to the goal
 
 			if(DEBUG){printf("distance('%s', '%s') = %f\n", gripper->GetName().c_str(), prop->model->GetName().c_str(), distGoal);}
 
