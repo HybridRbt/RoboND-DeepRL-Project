@@ -267,51 +267,86 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 		/ TODO - Check if there is collision between the arm and object, then issue learning reward
 		/
 		*/
+
 		bool anyPartTouched = false;
 
-		// check gripper first
-		if( strcmp(contacts->contact(i).gripper_link().c_str(), COLLISION_ITEM) != 0 )
+		// check if any contact object is the tube
+		if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM) != 0 )
 		{
-			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).gripper_link()
-						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
-
-			anyPartTouched = true;
-		}
-		else if( strcmp(contacts->contact(i).middle_collision().c_str(), COLLISION_ITEM) != 0 )
-		{
-			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).middle_collision()
-						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
-
-			anyPartTouched = true;
-		}
-		else if( strcmp(contacts->contact(i).right_gripper().c_str(), COLLISION_ITEM) != 0 )
-		{
-			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).right_gripper()
-						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
-
-			anyPartTouched = true;
-		}
-		else if( strcmp(contacts->contact(i).left_gripper().c_str(), COLLISION_ITEM) != 0 )
-		{
-			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).left_gripper()
-						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
-
-			anyPartTouched = true;
+			// obj 1 is the tube
+			if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_LINK1) != 0 )
+			{
+				// link 1 contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_LINK2) != 0 )
+			{
+				// link 2 contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_GRIP_LINK) != 0 )
+			{
+				// gripper link contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_GRIP_MID) != 0 )
+			{
+				// gripper middle contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_GRIP_RIGHT) != 0 )
+			{
+				// right gripper contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_GRIP_LEFT) != 0 )
+			{
+				// left gripper contacted
+				anyPartTouched = true;
+			}
 		}
 		else if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_ITEM) != 0 )
 		{
-			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).collision2()
-						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
-
-			anyPartTouched = true;
+			// obj 2 is the tube
+			if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_LINK1) != 0 )
+			{
+				// link 1 contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_LINK2) != 0 )
+			{
+				// link 2 contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_GRIP_LINK) != 0 )
+			{
+				// gripper link contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_GRIP_MID) != 0 )
+			{
+				// gripper middle contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_GRIP_RIGHT) != 0 )
+			{
+				// right gripper contacted
+				anyPartTouched = true;
+			}
+			else if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_GRIP_LEFT) != 0 )
+			{
+				// left gripper contacted
+				anyPartTouched = true;
+			}
 		}
-		else
-			anyPartTouched = false;
 
 		if (!anyPartTouched)
 			continue;
 		else
 		{
+			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).collision1()
+				<< "] and [" << contacts->contact(i).collision2() << "]\n";}
+
 			rewardHistory = REWARD_WIN;
 
 			newReward  = true;
