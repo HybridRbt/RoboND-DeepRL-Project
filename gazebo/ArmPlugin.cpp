@@ -258,31 +258,62 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 
 	for (unsigned int i = 0; i < contacts->contact_size(); ++i)
 	{
-		if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_FILTER) == 0 )
-			continue;
-
-		if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).collision1()
-			     << "] and [" << contacts->contact(i).collision2() << "]\n";}
-
-
 		/*
 		/ TODO - Check if there is collision between the arm and object, then issue learning reward
 		/
 		*/
+		bool anyPartTouched = false;
 
-		/*
-
-		if (collisionCheck)
+		// check gripper first
+		if( strcmp(contacts->contact(i).gripper_link().c_str(), COLLISION_ITEM) != 0 )
 		{
-			rewardHistory = None;
+			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).gripper_link()
+						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
 
-			newReward  = None;
-			endEpisode = None;
+			anyPartTouched = true;
+		}
+		else if( strcmp(contacts->contact(i).middle_collision().c_str(), COLLISION_ITEM) != 0 )
+		{
+			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).middle_collision()
+						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
+
+			anyPartTouched = true;
+		}
+		else if( strcmp(contacts->contact(i).right_gripper().c_str(), COLLISION_ITEM) != 0 )
+		{
+			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).right_gripper()
+						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
+
+			anyPartTouched = true;
+		}
+		else if( strcmp(contacts->contact(i).left_gripper().c_str(), COLLISION_ITEM) != 0 )
+		{
+			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).left_gripper()
+						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
+
+			anyPartTouched = true;
+		}
+		else if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_ITEM) != 0 )
+		{
+			if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).collision2()
+						 << "] and [" << contacts->contact(i).tube_collision() << "]\n";}
+
+			anyPartTouched = true;
+		}
+		else
+			anyPartTouched = false;
+
+		if (!anyPartTouched)
+			continue;
+		else
+		{
+			rewardHistory = REWARD_WIN;
+
+			newReward  = true;
+			endEpisode = true;
 
 			return;
 		}
-		*/
-
 	}
 }
 
