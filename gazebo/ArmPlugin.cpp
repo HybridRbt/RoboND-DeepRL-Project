@@ -59,9 +59,14 @@
 #define GRIP_NAME  "gripper_middle"
 
 // Define Collision Parameters
-#define COLLISION_FILTER "ground_plane::link::collision"
+#define COLLISION_PLANE "ground_plane::link::collision"
 #define COLLISION_ITEM   "tube::tube_link::tube_collision"
-#define COLLISION_POINT  "arm::gripperbase::gripper_link"
+#define COLLISION_LINK1  "arm::link1::collision"
+#define COLLISION_LINK2  "arm::link2::collision2"
+#define COLLISION_GRIP_LINK  "arm::gripperbase::gripper_link"
+#define COLLISION_GRIP_MID  "arm::gripper_middle::middle_collision"
+#define COLLISION_GRIP_RIGHT  "arm::gripper_right::right_gripper"
+#define COLLISION_GRIP_LEFT  "arm::gripper_left::left_gripper"
 
 // Animation Steps
 #define ANIMATION_STEPS 1000
