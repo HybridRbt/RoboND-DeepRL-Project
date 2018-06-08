@@ -673,6 +673,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		/ TODO - set appropriate Reward for robot hitting the ground.
 		/
 		*/
+		printf("current gripBBox height: %f\n", gripBBox.min.z);
 
 		if((float)gripBBox.min.z < groundContact)  // touch ground
 		{
