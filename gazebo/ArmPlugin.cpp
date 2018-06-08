@@ -676,7 +676,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 			if(DEBUG){printf("GROUND CONTACT, EOE\n");}
 
-			rewardHistory = REWARD_LOSS*10;
+			rewardHistory = REWARD_LOSS;
 			newReward     = true;
 			endEpisode    = true;
 		}
