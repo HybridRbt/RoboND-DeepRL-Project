@@ -73,7 +73,7 @@
 #define ANIMATION_STEPS 1000
 
 // Set Debug Mode
-#define DEBUG true
+#define DEBUG false
 
 // Lock base rotation DOF (Add dof in header file if off)
 #define LOCKBASE true
@@ -711,7 +711,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 				avgGoalDelta  = (avgGoalDelta * alpha) + (distDelta * (1 - alpha));
 				printf("avgGoalDelta: %f\n", avgGoalDelta);
-				rewardHistory = -avgGoalDelta; 
+				rewardHistory = -avgGoalDelta;
 				newReward     = true;
 			}
 
