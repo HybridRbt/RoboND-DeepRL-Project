@@ -171,11 +171,8 @@ bool ArmPlugin::createAgent()
 	/*
 	/ TODO - Create DQN Agent
 	/
-	*/
-
-	agent = NULL;
-
-	dqnAgent* agent = dqnAgent::Create(INPUT_WIDTH, INPUT_HEIGHT,
+	*/ß
+	agent = dqnAgent::Create(INPUT_WIDTH, INPUT_HEIGHT,
 										 INPUT_CHANNELS, NUM_ACTIONS, OPTIMIZER,
 										 LEARNING_RATE, REPLAY_MEMORY, BATCH_SIZE,
 										 GAMMA, EPS_START, EPS_END, EPS_DECAY,
