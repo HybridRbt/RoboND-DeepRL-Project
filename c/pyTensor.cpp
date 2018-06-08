@@ -89,7 +89,7 @@ pyTensor* pyTensor::Alloc( uint32_t width, uint32_t height=1, uint32_t depth )
 	// convey the size and dimensions of the tensor
 	long sizedata[3]   = { t->depth, t->height, t->width };//{ t->elements };	// { height, width };
 	long stridedata[3] = { t->width * t->height, t->width, 1 };//{ 1 };		// { width, 3 }  (for YUV)
-       
+
 	THLongStorage* sizeStorage   = THLongStorage_newWithData(sizedata, /*1*/3);
 	THLongStorage* strideStorage = THLongStorage_newWithData(stridedata, /*1*/3);
 
@@ -115,7 +115,7 @@ pyTensor* pyTensor::Alloc( uint32_t width, uint32_t height=1, uint32_t depth )
 
 	// confirm that the CUDA THCState global variable has been set
 	// note this should have occurred after 'import torch' was run in python
-	printf("[deepRL]  pyTorch THCState  0x%08X\n", state);
+	//printf("[deepRL]  pyTorch THCState  0x%08X\n", state);
 
 	if( !state )
 	{
@@ -156,4 +156,3 @@ pyTensor* pyTensor::Alloc( uint32_t width, uint32_t height=1, uint32_t depth )
 }
 
 #endif
-
