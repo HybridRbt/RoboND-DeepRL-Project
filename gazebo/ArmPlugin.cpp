@@ -52,6 +52,7 @@
 
 #define REWARD_WIN  1.0f
 #define REWARD_LOSS -1.0f
+#define INTERIM_REWARD_MULTIP 1000
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
@@ -711,7 +712,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 				avgGoalDelta  = (avgGoalDelta * alpha) + (distDelta * (1 - alpha));
 				printf("avgGoalDelta: %f", avgGoalDelta);
-				rewardHistory = -avgGoalDelta;
+				rewardHistory = -avgGoalDelta * INTERIM_REWARD_MULTIP;
 				newReward     = true;
 			}
 
