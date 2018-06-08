@@ -674,7 +674,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		/
 		*/
 
-		bool touchGround = (gripBBox.min[2] < groundContact);
+		bool touchGround = ((float)gripBBox.min.z < groundContact);
 
 		if(touchGround)  // touch ground
 		{
