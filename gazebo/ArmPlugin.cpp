@@ -23,7 +23,7 @@
 // Define DQN API Settings
 
 #define INPUT_CHANNELS 3   // this is the NUM_CHANNELS in catch sample
-#define NUM_ACTIONS    2 * DOF  // default in DQN.py = 3
+#define NUM_ACTIONS    3 // default in DQN.py = 3
 #define ALLOW_RANDOM true
 #define DEBUG_DQN false
 #define GAMMA 0.9f
