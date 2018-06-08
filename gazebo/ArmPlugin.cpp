@@ -409,7 +409,7 @@ bool ArmPlugin::updateAgent()
 	/
 	*/
 
-	float velocity = 0.0; // TODO - Set joint velocity based on whether action is even or odd.
+	float velocity = vel[action/2]; // TODO - Set joint velocity based on whether action is even or odd.
 
 	if (action % 2 == 0) // action is even
 	{
@@ -449,7 +449,7 @@ bool ArmPlugin::updateAgent()
 	/ TODO - Increase or decrease the joint position based on whether the action is even or odd
 	/
 	*/
-	float joint = 0.0; // TODO - Set joint position based on whether action is even or odd.
+	float joint = ref[action/2]; // TODO - Set joint position based on whether action is even or odd.
 
 	if (action % 2 == 0) // action is even
 	{
