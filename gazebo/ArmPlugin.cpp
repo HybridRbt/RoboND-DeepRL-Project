@@ -39,9 +39,9 @@
 #define INPUT_WIDTH   256
 #define INPUT_HEIGHT  256
 #define OPTIMIZER "RMSprop"
-#define LEARNING_RATE 0.001f
+#define LEARNING_RATE 0.01f
 #define REPLAY_MEMORY 10000
-#define BATCH_SIZE 64
+#define BATCH_SIZE 8
 #define USE_LSTM false
 #define LSTM_SIZE 32
 
@@ -72,7 +72,7 @@
 #define ANIMATION_STEPS 1000
 
 // Set Debug Mode
-#define DEBUG true
+#define DEBUG false
 
 // Lock base rotation DOF (Add dof in header file if off)
 #define LOCKBASE true
@@ -171,7 +171,7 @@ bool ArmPlugin::createAgent()
 	/*
 	/ TODO - Create DQN Agent
 	/
-	*/ß
+	*/
 	agent = dqnAgent::Create(INPUT_WIDTH, INPUT_HEIGHT,
 										 INPUT_CHANNELS, NUM_ACTIONS, OPTIMIZER,
 										 LEARNING_RATE, REPLAY_MEMORY, BATCH_SIZE,
@@ -670,7 +670,6 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		/ TODO - set appropriate Reward for robot hitting the ground.
 		/
 		*/
-		printf("current gripBBox height: %f\n", gripBBox.min.z);
 
 		if((float)gripBBox.min.z < groundContact)  // touch ground
 		{
