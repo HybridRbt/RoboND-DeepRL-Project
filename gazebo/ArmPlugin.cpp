@@ -711,7 +711,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 				float alpha = 0.3f;
 
 				avgGoalDelta  = (avgGoalDelta * alpha) + (distDelta * (1 - alpha));
-				printf("avgGoalDelta: %f", avgGoalDelta);
+				printf("avgGoalDelta: %f\n", avgGoalDelta);
 				rewardHistory = -avgGoalDelta * INTERIM_REWARD_MULTIP;
 				newReward     = true;
 			}
