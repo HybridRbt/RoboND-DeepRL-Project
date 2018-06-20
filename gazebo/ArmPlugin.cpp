@@ -46,7 +46,8 @@
 
 #define REWARD_WIN  1.0f
 #define REWARD_LOSS -1.0f
-#define INTERIM_REWARD_MULTIP 100000
+//#define INTERIM_REWARD_MULTIP 100000
+#define INTERIM_REWARD_MULTIP 10000
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
