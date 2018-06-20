@@ -39,8 +39,8 @@
 #define LEARNING_RATE 0.01f
 #define REPLAY_MEMORY 20000
 #define BATCH_SIZE 64
-#define USE_LSTM false
-#define LSTM_SIZE 32
+#define USE_LSTM true
+#define LSTM_SIZE 128
 
 // Define Reward Parameters
 
