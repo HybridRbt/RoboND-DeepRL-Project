@@ -277,12 +277,13 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 			// 	// left gripper contacted
 			// 	anyPartTouched = true;
 			// }
-			// else if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_PLANE) == 0 )
-			// {
-			// 	// ground plane contacted, doesn't count
-			// 	anyPartTouched = false;
-			// }
-			anyPartTouched = true;
+			if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_PLANE) == 0 )
+			{
+				// ground plane contacted, doesn't count
+				anyPartTouched = false;
+			}
+			else
+				anyPartTouched = true;
 		}
 		else if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_ITEM) == 0 )
 		{
@@ -317,12 +318,13 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 			// 	// left gripper contacted
 			// 	anyPartTouched = true;
 			// }
-			// else if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_PLANE) == 0 )
-			// {
-			// 	// ground plane contacted, doesn't count
-			// 	anyPartTouched = false;
-			// }
-			anyPartTouched = true;
+			if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_PLANE) == 0 )
+			{
+				// ground plane contacted, doesn't count
+				anyPartTouched = false;
+			}
+			else
+				anyPartTouched = true;
 		}
 
 		if (!anyPartTouched)
