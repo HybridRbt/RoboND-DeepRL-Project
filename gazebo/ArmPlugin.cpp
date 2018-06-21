@@ -670,7 +670,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 				avgGoalDelta  = (avgGoalDelta * alpha) + (distDelta * (1 - alpha));
 				if (DEBUG) {printf("avgGoalDelta: %f\n", avgGoalDelta);}
-				rewardHistory = -avgGoalDelta;
+				rewardHistory = avgGoalDelta;
 				newReward     = true;
 			}
 
