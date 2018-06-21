@@ -71,6 +71,9 @@
 // Lock base rotation DOF (Add dof in header file if off)
 #define LOCKBASE true
 
+// which part of the arm to be checked for contact
+#define ANY_PART true
+
 namespace gazebo {
 
 // register this plugin with the simulator
@@ -236,102 +239,38 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts) {
   for (unsigned int i = 0; i < contacts->contact_size(); ++i) {
     // Check if there is collision between the arm and object, then issue
     // learning reward
-    bool anyPartTouched = false;
+    bool contacted = false;
 
     // check if any contact object is the tube
     if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM) ==
         0) {
-      // // obj 1 is the tube
-      // if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_LINK1)
-      // == 0 )
-      // {
-      // 	// link 1 contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision2().c_str(),
-      // COLLISION_LINK2) == 0 )
-      // {
-      // 	// link 2 contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision2().c_str(),
-      // COLLISION_GRIP_LINK) == 0 )
-      // {
-      // 	// gripper link contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision2().c_str(),
-      // COLLISION_GRIP_MID) == 0 )
-      // {
-      // 	// gripper middle contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision2().c_str(),
-      // COLLISION_GRIP_RIGHT) == 0 )
-      // {
-      // 	// right gripper contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision2().c_str(),
-      // COLLISION_GRIP_LEFT) == 0 )
-      // {
-      // 	// left gripper contacted
-      // 	anyPartTouched = true;
-      // }
       if (strcmp(contacts->contact(i).collision2().c_str(), COLLISION_PLANE) ==
           0) {
         // ground plane contacted, doesn't count
-        anyPartTouched = false;
+        contacted = false;
+      } else if (ANY_PART) {
+        contacted = true;
+      } else if (strcmp(contacts->contact(i).collision2().c_str(),
+                        COLLISION_GRIP_LINK) == 0) {
+        contacted = true;
       } else
-        anyPartTouched = true;
+        contacted = false;
     } else if (strcmp(contacts->contact(i).collision2().c_str(),
                       COLLISION_ITEM) == 0) {
-      // // obj 2 is the tube
-      // if( strcmp(contacts->contact(i).collision1().c_str(), COLLISION_LINK1)
-      // == 0 )
-      // {
-      // 	// link 1 contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision1().c_str(),
-      // COLLISION_LINK2) == 0 )
-      // {
-      // 	// link 2 contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision1().c_str(),
-      // COLLISION_GRIP_LINK) == 0 )
-      // {
-      // 	// gripper link contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision1().c_str(),
-      // COLLISION_GRIP_MID) == 0 )
-      // {
-      // 	// gripper middle contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision1().c_str(),
-      // COLLISION_GRIP_RIGHT) == 0 )
-      // {
-      // 	// right gripper contacted
-      // 	anyPartTouched = true;
-      // }
-      // else if( strcmp(contacts->contact(i).collision1().c_str(),
-      // COLLISION_GRIP_LEFT) == 0 )
-      // {
-      // 	// left gripper contacted
-      // 	anyPartTouched = true;
-      // }
       if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_PLANE) ==
           0) {
         // ground plane contacted, doesn't count
-        anyPartTouched = false;
+        contacted = false;
+      } else if (ANY_PART) {
+        contacted = true;
+      } else if (strcmp(contacts->contact(i).collision1().c_str(),
+                        COLLISION_GRIP_LINK) == 0) {
+        contacted = true;
       } else
-        anyPartTouched = true;
+        contacted = false;
     }
 
-    if (!anyPartTouched)
+    if (!contacted)
       continue;
     else {
       if (DEBUG) {
