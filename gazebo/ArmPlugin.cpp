@@ -666,7 +666,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 				const float distDelta  = lastGoalDistance - distGoal;
 
 				// compute the smoothed moving average of the delta of the distance to the goal
-				float alpha = 0.35f;
+				float alpha = 0.32f;
 
 				avgGoalDelta  = (avgGoalDelta * alpha) + (distDelta * (1 - alpha));
 				if (DEBUG) {printf("avgGoalDelta: %f\n", avgGoalDelta);}
