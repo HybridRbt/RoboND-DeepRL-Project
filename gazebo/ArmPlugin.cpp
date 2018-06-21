@@ -72,7 +72,7 @@
 #define LOCKBASE true
 
 // which part of the arm to be checked for contact
-#define ANY_PART true
+#define ANY_PART false
 
 namespace gazebo {
 
