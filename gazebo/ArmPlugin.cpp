@@ -235,9 +235,7 @@ namespace gazebo
     newState = true;
 
     if (DEBUG)
-    {
       printf("camera %i x %i  %i bpp  %i bytes\n", width, height, bpp, size);
-    }
   }
 
   // onCollisionMsg
@@ -261,46 +259,30 @@ namespace gazebo
       {
         if (strcmp(contacts->contact(i).collision2().c_str(), COLLISION_PLANE) ==
             0)
-        {
           // ground plane contacted, doesn't count
           contacted = false;
-        }
         else if (ANY_PART)
-        {
           contacted = true;
-        }
         else if (strcmp(contacts->contact(i).collision2().c_str(),
                         COLLISION_GRIP_LINK) == 0)
-        {
           contacted = true;
-        }
         else
-        {
           contacted = false;
-        }
       }
       else if (strcmp(contacts->contact(i).collision2().c_str(),
                       COLLISION_ITEM) == 0)
       {
         if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_PLANE) ==
             0)
-        {
           // ground plane contacted, doesn't count
           contacted = false;
-        }
         else if (ANY_PART)
-        {
           contacted = true;
-        }
         else if (strcmp(contacts->contact(i).collision1().c_str(),
                         COLLISION_GRIP_LINK) == 0)
-        {
           contacted = true;
-        }
         else
-        {
           contacted = false;
-        }
       }
 
       if (!contacted)
@@ -355,9 +337,7 @@ namespace gazebo
     }
 
     if (DEBUG)
-    {
       printf("ArmPlugin - agent selected action %i\n", action);
-    }
 
 #if VELOCITY_CONTROL
 
@@ -370,13 +350,9 @@ namespace gazebo
                                       // whether action is even or odd.
 
     if (action % 2 == 0)              // action is even
-    {
       velocity += actionVelDelta;
-    }
     else
-    {
       velocity -= actionVelDelta;
-    }
 
     if (velocity < VELOCITY_MIN)
       velocity = VELOCITY_MIN;
@@ -401,7 +377,7 @@ namespace gazebo
         vel[n] = 0.0f;
       }
     }
-#else // if VELOCITY_CONTROL
+#else // if pos control
 
     // - Increase or decrease the joint position based on whether the action is
     // even or odd
@@ -409,13 +385,9 @@ namespace gazebo
                                    // action is even or odd.
 
     if (action % 2 == 0)           // action is even
-    {
       joint += actionJointDelta;
-    }
     else
-    {
       joint -= actionJointDelta;
-    }
 
     // limit the joint to the specified range
     if (joint < JOINT_MIN)
@@ -508,9 +480,7 @@ namespace gazebo
       episodeFrames++;
 
       if (DEBUG)
-      {
         printf("episode frame = %i\n", episodeFrames);
-      }
 
       // reset camera ready flag
       newState = false;
@@ -644,20 +614,16 @@ namespace gazebo
       if ((float)gripBBox.min.z < groundContact) // touch ground
       {
         if (DEBUG)
-        {
           printf("GROUND CONTACT, EOE\n");
-        }
 
         rewardHistory = REWARD_LOSS;
         newReward     = true;
         endEpisode    = true;
       }
-      else                     // Issue an interim reward based on the distance
-                               // to
-                               // the object
+      else // Issue an interim reward based on the distance to the object
       {
-        const float distGoal = BoxDistance(
-          gripBBox, propBBox); // compute the reward from distance to the goal
+        // compute the reward from distance to the goal
+        const float distGoal = BoxDistance(gripBBox, propBBox);
 
         if (DEBUG)
         {
@@ -676,9 +642,8 @@ namespace gazebo
           avgGoalDelta = (avgGoalDelta * alpha) + (distDelta * (1 - alpha));
 
           if (DEBUG)
-          {
             printf("avgGoalDelta: %f\n", avgGoalDelta);
-          }
+
           rewardHistory = avgGoalDelta;
           newReward     = true;
         }
