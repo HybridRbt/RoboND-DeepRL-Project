@@ -1,3 +1,4 @@
+[![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 
 # Deep RL Arm Manipulation
 
@@ -27,11 +28,11 @@ During the `cmake` step, Torch will be installed so it can take awhile. It will 
 
 To make sure that the reinforcement learners are still functioning properly from C++, a simple example of using the API called [`catch`](samples/catch/catch.cpp) is provided.  Similar in concept to pong, a ball drops from the top of the screen which the agent must catch before the ball reaches the bottom of the screen, by moving it's paddle left or right.
 
-To test the textual [`catch`](samples/catch/catch.cpp) sample, run the following executable from the terminal.  After around 100 episodes or so, the agent should start winning the episodes nearly 100% of the time:  
+To test the textual [`catch`](samples/catch/catch.cpp) sample, run the following executable from the terminal.  After around 100 episodes or so, the agent should start winning the episodes nearly 100% of the time:
 
 ``` bash
 $ cd RoboND-DeepRL-Project/build/aarch64/bin
-$ ./catch 
+$ ./catch
 [deepRL]  input_width:    64
 [deepRL]  input_height:   64
 [deepRL]  input_channels: 1
@@ -53,13 +54,13 @@ $ ./catch
 [deepRL]  pyTorch THCState  0x0318D490
 [deepRL]  nn.Conv2d() output size = 800
 WON! episode 1
-001 for 001  (1.0000)  
+001 for 001  (1.0000)
 WON! episode 5
-004 for 005  (0.8000)  
+004 for 005  (0.8000)
 WON! episode 10
-007 for 010  (0.7000)  
+007 for 010  (0.7000)
 WON! episode 15
-010 for 015  (0.6667)  
+010 for 015  (0.6667)
 WON! episode 20
 013 for 020  (0.6500)  13 of last 20  (0.65)  (max=0.65)
 WON! episode 25
